@@ -1,0 +1,14 @@
+name: macOS (Apple Silicon)
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  test:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt pytest
+      - run: python -c "import openwakeword; openwakeword.utils.download_models(model_names=['hey_jarvis'])"
+      - run: pytest -v -s
+      - run: python doctor.py --quick || true

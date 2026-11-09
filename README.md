@@ -20,9 +20,40 @@ Only the Claude API call leaves your machine. The wake word, recording, transcri
 | `audio.py` | Microphone, Porcupine/openWakeWord wake word, silence-detecting recorder, faster-whisper. |
 | `tts.py` | Speech output. `say` with Daniel by default, plus an ElevenLabs engine you can switch on. |
 | `.env.example` | Template for your keys and settings. Copy it to `.env`. |
+| `setup.sh` / `doctor.py` | One-command installer and self-check. |
+| `scripts/` | Auto-start at login (LaunchAgent) install/uninstall. |
 | `RECOMMENDED_SHORTCUTS.md` | The Apple Shortcuts to create so Jarvis can reach your iPhone and iPad. |
 
-## Setup
+## Quick setup (recommended)
+
+```bash
+git clone https://github.com/jayrajkatakdhond2004-bot/jarvis-.git jarvis && cd jarvis && ./setup.sh
+```
+
+`setup.sh` does the whole setup for you:
+- finds or installs Python 3.11+ and creates the virtualenv
+- installs the dependencies
+- asks for your API keys (hidden input) and saves them only in `.env`
+- downloads the speech models
+- runs `doctor.py`, which checks every piece and opens the System Settings panes you still need to fix
+
+Run the self-check again any time:
+
+```bash
+python doctor.py
+```
+
+To start Jarvis automatically at login (logs go to `~/Library/Logs/Jarvis.log`):
+
+```bash
+./scripts/install_autostart.sh
+```
+
+Undo that with `./scripts/uninstall_autostart.sh`.
+
+Tests: `pytest`. The macOS tests run in GitHub Actions on an Apple Silicon runner: they transcribe real `say` audio with Whisper and check the "Hey Jarvis" wake word.
+
+## Manual setup
 
 Requires an Apple Silicon Mac and Python 3.11 or newer.
 
