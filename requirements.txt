@@ -1,0 +1,15 @@
+# Brain
+anthropic>=2.7.0
+python-dotenv>=1.0
+
+# Audio I/O
+numpy>=1.26
+sounddevice>=0.5
+
+# Wake word: Porcupine (primary, needs PICOVOICE_ACCESS_KEY) + openWakeWord (free fallback)
+pvporcupine>=3.0
+openwakeword>=0.6.0
+onnxruntime>=1.17
+
+# Local speech-to-text
+faster-whisper>=1.1
